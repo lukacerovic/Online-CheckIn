@@ -2,20 +2,20 @@ import { createSlice } from "@reduxjs/toolkit";
 
 // Initial states
 const initialState = {
-    currentHotel: null,
+    currentAccount: null,
     error: null,
     loading: false,
 };
 
-const hotelSlice = createSlice({
-    name: 'hotel',
+const accountSlice = createSlice({
+    name: 'account',
     initialState,
     reducers: {
         signInStart: (state) => {
             state.loading = true;
         },
         signInSuccess: (state, action) => {
-            state.currentHotel = action.payload;
+            state.currentAccount = action.payload;
             state.loading = false;
             state.error = null;
         },
@@ -26,6 +26,6 @@ const hotelSlice = createSlice({
     }
 });
 
-export const { signInStart, signInSuccess, signInFailure } = hotelSlice.actions;
+export const { signInStart, signInSuccess, signInFailure } = accountSlice.actions;
 
-export default hotelSlice.reducer;
+export default accountSlice.reducer;

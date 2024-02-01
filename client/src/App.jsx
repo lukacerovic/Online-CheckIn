@@ -3,6 +3,7 @@ import Home from "./pages/Home"
 import SignInHotel from "./pages/SignInHotel"
 import SignUpHotel from "./pages/SignUpHotel"
 import HotelProfile from "./pages/HotelProfile"
+import HotelListings from "./pages/HotelListings"
 import TouristProfile from "./pages/TouristProfile"
 import SignUpTourist from "./pages/SignUpTourist"
 import SignInTourist from "./pages/SignInTourist"
@@ -17,6 +18,7 @@ export default function App() {
         <Route path='/sign-up-tourist' element={<SignUpTourist />} />
         <Route path='/sign-in-tourist' element={<SignInTourist />} />
         <Route path='/hotel-profile' element={<HotelProfile />} />
+        <Route path='/hotel-listing' element={<HotelListings />} />
         <Route path='/tourist-profile' element={<TouristProfile />} />
       </Routes>
     </BrowserRouter>

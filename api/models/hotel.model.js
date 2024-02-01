@@ -20,6 +20,10 @@ const hotelSchema = new mongoose.Schema({
         type: String,
         default: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png", // dodali smo sliku sa neta ako korisnik nema sliku da mu stoji ikonica korisnika bez slike
     },
+    type: {
+        type: String,
+        default: 'hotel'
+    }
 
 }, { timestamps: true });  // prilikom svakog rezultata koji se kreira ce beleziti i vreme kada se rezultat upisao i updatovao.
 

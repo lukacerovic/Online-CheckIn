@@ -21,6 +21,19 @@ export const signupHotel = async (req, res, next) => {  // kreiramo asinhronu zb
 
 };
 
+export const signupTourist = async (req, res, next) => {
+    const { name, lastName, email, password, gender, type } = req.body;
+    const hashedPassword = bcryptjs.hashSync(password, 10); 
+
+    const newTourist = new Tourist({ name, lastName, email, password:hashedPassword, gender, type });
+    try{
+        await newTourist.save();
+        res.status(201).send('User added to database');
+    } catch(error) {
+        next(error);
+    }
+};
+
 export const signinHotel = async(req, res, next) => {
     const { email, password } = req.body;
     try{
@@ -41,16 +54,24 @@ export const signinHotel = async(req, res, next) => {
     }
 };
 
-// export const signupTourist = async (req, res, next) => {
-//     const { name, lastName, email, password, gender } = req.body;
-//     const hashedPassword = bcryptjs.hashSync(password, 10); 
 
-//     const newTourist = new Tourist({ name, lastName, email, password, gender });
-//     console.log(newTourist); 
-//     try{
-//         await newTourist.save();
-//         res.status(201).send('User added to database');
-//     } catch(error) {
-//         next(error);
-//     }
-// };
+export const signinTourist = async (req, res, next) => {
+    const { email, password } = req.body;
+    try{
+        const validTourist = await Tourist.findOne({ email });
+        console.log(validTourist);
+        if (!validTourist) return next(errorHandler(404, 'User not found'));
+        
+        const validPassword = bcryptjs.compareSync(password, validTourist.password);
+        if(!validPassword) return next(errorHandler(401, 'Wrong credentials'));
+        
+        const token = jwt.sign({ id: validTourist._id }, process.env.JWT_SECRET);
+        const { password: pass, ...rest } = validTourist._doc;
+        res.cookie('access_token', token, { httpOnly: true })
+        .status(200)
+        .json(rest);
+
+    } catch (error) {
+        next(error);
+    }
+};

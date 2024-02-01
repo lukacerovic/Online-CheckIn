@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { signInStart, signInSuccess, signInFailure } from '../redux/hotel/hotelSlice.js';
+import { signInStart, signInSuccess, signInFailure } from '../redux/account/accountSlice.js';
 
 export default function SignInHotel() {
   const [formData, setFormData] = useState({});

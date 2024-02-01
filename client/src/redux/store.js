@@ -1,9 +1,9 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import hotelReducer from './hotel/hotelSlice.js';
+import accountReducer from './account/accountSlice.js';
 import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-const rootReducer = combineReducers({ hotel: hotelReducer });
+const rootReducer = combineReducers({ account: accountReducer });
 
 const persistConfig = {
     key: 'root',

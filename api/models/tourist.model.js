@@ -20,6 +20,10 @@ const touristSchema = new mongoose.Schema({
     gender: {
         type: String,
         requred: true
+    },
+    type: {
+        type: String,
+        default: 'tourist'
     }
 }, { timestamps: true });
 
