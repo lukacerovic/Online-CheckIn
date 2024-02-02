@@ -65,7 +65,9 @@ export default function HotelProfile() {
           <Link to={`/hotel-edit/${currentUserData._id}`}>
             <button className='bg-slate-700 rounded-lg uppercase p-3 cursor-pointer'>Edit Profile</button>
           </Link>
-          <button className='bg-green-700 rounded-lg p-3 uppercase cursor-pointer'>Create Listing</button>
+          <Link to={'/create-room'}>
+            <button className='bg-green-700 rounded-lg p-3 uppercase cursor-pointer'>Create Listing</button>
+          </Link>   
         </div>
         <div className='flex gap-4 mt-5'>
           <span onClick={handleDeleteHotel} className='bg-red-700 rounded-lg p-3 uppercase cursor-pointer'>Delete Account</span>

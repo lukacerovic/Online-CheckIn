@@ -9,6 +9,7 @@ import SignUpTourist from "./pages/SignUpTourist"
 import SignInTourist from "./pages/SignInTourist"
 import EditHotel from "./pages/EditHotel"
 import EditTourist from "./pages/EditTourist"
+import CreateRoom from "./pages/CreateRoom"
 
 export default function App() {
   return (
@@ -24,6 +25,7 @@ export default function App() {
         <Route path='/hotel-edit/:id' element={<EditHotel />} />
         <Route path='/tourist-edit/:id' element={<EditTourist />} />
         <Route path='/tourist-profile' element={<TouristProfile />} />
+        <Route path='/create-room' element={<CreateRoom />} />
       </Routes>
     </BrowserRouter>
   )
