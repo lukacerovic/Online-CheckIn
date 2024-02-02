@@ -35,6 +35,7 @@ export default function SignInHotel() {
         return;
       }
       dispatch(signInSuccess(data));
+      
       navigate('/tourist-profile');
     } catch (error) {
       dispatch(signInFailure(data.message));

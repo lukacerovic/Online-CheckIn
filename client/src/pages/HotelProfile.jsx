@@ -1,27 +1,75 @@
 import { useRef, useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { IoPersonSharp, IoBedSharp } from "react-icons/io5";
+import Header from '../components/Header';
+import { useSelector, useDispatch } from 'react-redux';
+import { deleteUserFailure, deleteUserStart, deleteUserSuccess, signOutUserFailure, signOutUserStart, signOutUserSuccess } from '../redux/account/accountSlice';
 
-export default function Profile() {
+export default function HotelProfile() {
+  const currentUser = useSelector((state) => state.account);
+  const currentUserData = currentUser.currentAccount
+
+  const dispatch = useDispatch();
+  const navigation = useNavigate();
+
+  const handleSignOut = async () => {
+    try {
+      dispatch(signOutUserStart());
+      const res = await fetch('/api/auth/signoutUser'); // ne moramo da definisemo metod jer koristimo get a ne post metodu a get je po difoltu postavljen
+      const data = await res.json();
+
+      if (data.success === false) {
+        dispatch(signOutUserFailure(data.message));
+        return;
+      }
+      dispatch(signOutUserSuccess(data));
+      navigation('/sign-in-hotel')
+    } catch (error) {
+      dispatch(signOutUserFailure(data.message));
+    }
+  };
+
+  const handleDeleteHotel = async () => {
+    try {
+      dispatch(deleteUserStart());
+      const res = await fetch(`/api/hotel/deleteHotel/${currentUserData._id}`, {
+        method: 'DELETE',
+        // ne treba nam headers i body
+      });
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch(deleteUserFailure(data.message));
+        return;
+      }
+
+      // ako je sve u redu
+      dispatch(deleteUserSuccess(data));
+      navigation('/');
+    } catch (error) {
+      dispatch(deleteUserFailure(error.message));
+    }
+  };
 
   return (
     <div className='mx-auto flex flex-col'>
+      <Header/>
       <h1 className='text-3xl text-white font-semibold text-center my-10'>Profile</h1>
       <form className='self-center w-full'>
         <div className='flex flex-col'>
-          <input type='file' hidden/>
-          <img className='rounded shadow h-30 w-40 object-cover cursor-pointer self-center mt-2' src='https://pointmetotheplane.boardingarea.com/wp-content/uploads/2016/06/Radisson-Blu.jpg' alt="profile" style={{position:'absolute',}}/>
+          <img className='rounded shadow h-30 w-40 object-cover cursor-pointer self-center mt-2' src={currentUserData.logo} alt="profile" style={{position:'absolute',}}/>
           <img src='https://images.unsplash.com/photo-1561501900-3701fa6a0864?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bHV4dXJ5JTIwaG90ZWx8ZW58MHx8MHx8fDA%3D' style={{height:'60vh'}}/>
         </div>
       </form>
       <div className='flex text-white justify-between w-[80%] self-center items-center mb-10' >
         <div className='flex gap-4 mt-5'>
-          <button className='bg-slate-700 rounded-lg uppercase p-3 cursor-pointer'>Edit Profile</button>
+          <Link to={`/hotel-edit/${currentUserData._id}`}>
+            <button className='bg-slate-700 rounded-lg uppercase p-3 cursor-pointer'>Edit Profile</button>
+          </Link>
           <button className='bg-green-700 rounded-lg p-3 uppercase cursor-pointer'>Create Listing</button>
         </div>
         <div className='flex gap-4 mt-5'>
-          <span className='bg-red-700 rounded-lg p-3 uppercase cursor-pointer'>Delete Account</span>
-          <span className='bg-red-700 rounded-lg p-3 uppercase cursor-pointer'>Sign out</span>
+          <span onClick={handleDeleteHotel} className='bg-red-700 rounded-lg p-3 uppercase cursor-pointer'>Delete Account</span>
+          <span onClick={handleSignOut} className='bg-red-700 rounded-lg p-3 uppercase cursor-pointer'>Sign out</span>
         </div>
       </div>
       <div className='flex flex-col mt-10 ml-10 mb-10'>

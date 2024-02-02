@@ -5,7 +5,7 @@ import { signInStart, signInSuccess, signInFailure } from '../redux/account/acco
 
 export default function SignInHotel() {
   const [formData, setFormData] = useState({});
-  const { loading, error } = useSelector((state) => state.hotel)
+  const { loading, error } = useSelector((state) => state.account)
   const navigate = useNavigate();
   const dispatch = useDispatch();
 

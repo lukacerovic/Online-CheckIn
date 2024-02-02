@@ -35,9 +35,11 @@ export const signupTourist = async (req, res, next) => {
 };
 
 export const signinHotel = async(req, res, next) => {
+    console.log('Hotel')
     const { email, password } = req.body;
     try{
         const validHotel = await Hotel.findOne({ email });
+        console.log(validHotel);
         if (!validHotel) return next(errorHandler(404, 'User not found'));
         
         const validPassword = bcryptjs.compareSync(password, validHotel.password);
@@ -56,6 +58,7 @@ export const signinHotel = async(req, res, next) => {
 
 
 export const signinTourist = async (req, res, next) => {
+    console.log('Evo turiste')
     const { email, password } = req.body;
     try{
         const validTourist = await Tourist.findOne({ email });
@@ -71,6 +74,16 @@ export const signinTourist = async (req, res, next) => {
         .status(200)
         .json(rest);
 
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const signoutUser = async (req, res, next) => {
+    // clear cookie
+    try {
+        res.clearCookie('access_token');
+        res.status(200).json('User has been logged out')
     } catch (error) {
         next(error);
     }
