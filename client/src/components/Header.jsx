@@ -20,7 +20,7 @@ export default function Header() {
                     <li className='hidden sm:inline hover:underline'>About</li>
                 </Link>
                 {/* Ako korisnik nije ulogovan prikazi sign in dugme, u suprotnom sliku avatara */}
-                <Link to={currentUserData && currentUserData.type === 'hotel' ? '/tourist-profile' : '/hotel-profile'}>
+                <Link to={currentUserData && currentUserData.type === 'hotel' ? '/hotel-profile' : '/tourist-profile'}>
                     {currentUserData ? (
                         <>
                             {currentUserData.type === 'hotel' ? (

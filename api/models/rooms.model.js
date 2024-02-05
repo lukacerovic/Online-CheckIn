@@ -6,6 +6,10 @@ const roomsSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
+        logo: {
+            type: String,
+            default: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png", // dodali smo sliku sa neta ako korisnik nema sliku da mu stoji ikonica korisnika bez slike
+        },
         description: {
             type: String,
             required: true,
@@ -15,6 +19,10 @@ const roomsSchema = new mongoose.Schema(
             required: true,
         },
         price: {
+            type: Number,
+            required: true,
+        },
+        numberOfGuests: {
             type: Number,
             required: true,
         },
@@ -34,10 +42,15 @@ const roomsSchema = new mongoose.Schema(
             type: Array,
             required: true
         },
+        availableRooms: {
+            type: Number,
+            requred: true,
+        },
         userRef: {
             type: String,
             required: true
         },
+
     }, {timestamps: true}
 
 );

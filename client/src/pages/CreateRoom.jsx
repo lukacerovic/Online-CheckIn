@@ -3,15 +3,21 @@ import Header from "../components/Header";
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
 import { app } from "../firebase";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 
 export default function CreateRoom() {
     const [files, setFiles] = useState([]);
+    const currentUser = useSelector((state) => state.account);
+    const currentUserData = currentUser.currentAccount;
     const [formData, setFormData] = useState({
         imageUrls: [],
+        logo: currentUser.currentAccount.logo,
         name: '',
         description: '',
         address: '',
+        availableRooms: '1',
+        numberOfGuests: '1',
         bedrooms: '1',
         bathrooms: '1',
         price: 0,
@@ -21,9 +27,7 @@ export default function CreateRoom() {
     const [uploading, setUploading] = useState(false);
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(false);
-
-    const currentUser = useSelector((state) => state.account);
-    const currentUserData = currentUser.currentAccount;
+    const navigation = useNavigate();
 
     console.log(formData);
      
@@ -129,11 +133,12 @@ export default function CreateRoom() {
                   }),
             });
             const data = await res.json();
-            console.log("Ovo je Data:", data);
+            
             setLoading(false);
             if(data.success == false){
                 setError(error.message);
             }
+            navigation('/hotel-listings');
         } catch (error) {
             setError(error.message);  // kreirali smo peace of state za error iznad zato je ovde koristimo (const [error, setError] = useState(false);)
             setLoading(false);  // // kreirali smo peace of state za loading iznad zato je ovde koristimo (const [loading, setLoading] = useState(false);)
@@ -176,8 +181,32 @@ export default function CreateRoom() {
                     id='address' 
                     required
                     />
-                    
-                    <div className='flex flex-wrap gap-6'>
+                    <p className='text-lg mt-3'>How many this type of room your hotel have?</p>
+                    <input 
+                        type='number' 
+                        id='availableRooms' 
+                        onChange={handleChange} 
+                        value={formData.availableRooms} 
+                        min='1' 
+                        max='500' 
+                        className='p-3 border w-40 border-gray-300 rounded-lg' 
+                        required
+                    />
+                      
+                    <div className='flex flex-wrap gap-10'>
+                        <div className='flex items-center gap-2'>
+                            <input 
+                            type='number' 
+                            id='numberOfGuests' 
+                            onChange={handleChange} 
+                            value={formData.numberOfGuests} 
+                            min='1' 
+                            max='10' 
+                            className='p-3 border border-gray-300 rounded-lg' 
+                            required
+                            />
+                            <p>Guests</p>
+                        </div>
                         <div className='flex items-center gap-2'>
                             <input 
                             type='number' 
@@ -217,7 +246,7 @@ export default function CreateRoom() {
                             />
                             <div className='flex flex-col items-center'>
                                 <p>Regular price</p>
-                                <span className='text-xs'>($ / month)</span>
+                                <span className='text-xs'>($ / night)</span>
                             </div>                       
                         </div>
                     </div>

@@ -21,7 +21,7 @@ export default function App() {
         <Route path='/sign-up-tourist' element={<SignUpTourist />} />
         <Route path='/sign-in-tourist' element={<SignInTourist />} />
         <Route path='/hotel-profile' element={<HotelProfile />} />
-        <Route path='/hotel-listing' element={<HotelListings />} />
+        <Route path='/hotel-listings' element={<HotelListings />} />
         <Route path='/hotel-edit/:id' element={<EditHotel />} />
         <Route path='/tourist-edit/:id' element={<EditTourist />} />
         <Route path='/tourist-profile' element={<TouristProfile />} />

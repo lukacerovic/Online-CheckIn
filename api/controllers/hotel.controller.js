@@ -54,4 +54,4 @@ export const deleteHotel = async (req, res, next) => {
     } catch (error) {
         next(error)
     }
-}
+};

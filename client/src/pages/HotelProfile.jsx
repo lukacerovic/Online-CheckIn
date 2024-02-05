@@ -7,11 +7,38 @@ import { deleteUserFailure, deleteUserStart, deleteUserSuccess, signOutUserFailu
 
 export default function HotelProfile() {
   const currentUser = useSelector((state) => state.account);
-  const currentUserData = currentUser.currentAccount
+  const currentUserData = currentUser.currentAccount;
+  const [listings, setListings] = useState(undefined);
+  const [showListingsError, setShowListingsError] = useState(false);
 
+  console.log(listings);
   const dispatch = useDispatch();
   const navigation = useNavigate();
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setShowListingsError(false);
+        const res = await fetch(`/api/rooms/listings/${currentUserData._id}`);
+        if (!res.ok) {
+          throw new Error('HTTP error, status = ' + res.status);
+        }
+        const data = await res.json();
+        console.log("Ovo je data za listings: ", data);
+        if (!Array.isArray(data)) {
+          throw new Error('Data is not in the expected format');
+        }
+        setListings(data);
+      } catch (error) {
+        console.error('Error fetching listings:', error);
+        setShowListingsError(true);
+      }
+    };
+  
+    fetchData();
+  }, [currentUserData._id]);
+
+  
   const handleSignOut = async () => {
     try {
       dispatch(signOutUserStart());
@@ -74,36 +101,48 @@ export default function HotelProfile() {
           <span onClick={handleSignOut} className='bg-red-700 rounded-lg p-3 uppercase cursor-pointer'>Sign out</span>
         </div>
       </div>
-      <div className='flex flex-col mt-10 ml-10 mb-10'>
-        <h1 className='text-white text-3xl self-center mb-10'>Your All Listings</h1>
-        <div className='flex rounded p-5' style={{background:'rgba(229, 228, 226, 0.1)'}}>
-          <img style={{width:'30%'}} className='rounded' src='https://publish.purewow.net/wp-content/uploads/sites/2/2019/08/grand-velas.jpeg?fit=1360%2C906'/>
-          <div className='ml-3'>
-            <img style={{height:'19vh'}} className='rounded mb-3' src='https://publish.purewow.net/wp-content/uploads/sites/2/2019/08/grand-velas.jpeg?fit=1360%2C906'/>
-            <img style={{height:'19vh'}} className='rounded' src='https://publish.purewow.net/wp-content/uploads/sites/2/2019/08/grand-velas.jpeg?fit=1360%2C906'/>
+      {listings && listings.length > 0 && 
+        <div className='flex flex-col mt-10 ml-10 mb-10'>
+          <h1 className='text-white text-3xl self-center mb-10'>Your All Listings</h1>
+          {listings.map((listing) => (
+          <div className='flex rounded p-5 mb-5' style={{background:'rgba(229, 228, 226, 0.1)'}}>
+            <img style={{width:'30%', height:'39vh'}} className='rounded' src={listing.imageUrls[0]}/>
+            <div className='ml-3 bg-transparent'>
+              <img style={{height:'19vh'}} className='rounded mb-3' src='https://publish.purewow.net/wp-content/uploads/sites/2/2019/08/grand-velas.jpeg?fit=1360%2C906'/>
+              <img style={{height:'19vh'}} className='rounded' src='https://publish.purewow.net/wp-content/uploads/sites/2/2019/08/grand-velas.jpeg?fit=1360%2C906'/>
+            </div>
+            <div className='bg-transparent ml-10 flex-1'>
+              <h1 className='bg-transparent text-white text-2xl capitalize'>{listing.name}</h1>
+              <p className='bg-transparent text-white pt-3'>{listing.address}</p>   
+              <div className='flex bg-transparent gap-6 mt-3'>
+                <span className='flex items-center bg-transparent gap-2'>
+                  <IoPersonSharp color='white' className='bg-transparent' size={30}/>
+                  <p className='bg-transparent text-white'>2</p>
+                </span>
+                <span className='flex items-center bg-transparent gap-2'>
+                  <IoBedSharp color='white' className='bg-transparent' size={30} />
+                  <p className='bg-transparent text-white'>{listing.bedrooms}</p>
+                </span>
+              </div> 
+              <div className='flex flex-wrap gap-3 mt-3 text-white capitalize bg-transparent'>
+                {listing.includes.map((item, index) => (
+                  <div key={index} className='bg-transparent'>
+                    <p className='bg-transparent'>{item}</p>
+                  </div>
+                ))}
+              </div>
+              <p className='bg-transparent text-white mt-3'>{listing.description}</p>
+              <h1 className='bg-transparent text-2xl text-white mt-3'>Price: {listing.price}$ / night</h1>
+              <h1 className='bg-transparent text-xl text-white mt-10'>Number of rooms: {listing.availableRooms}</h1>
+              <h1 className='bg-transparent text-xl text-white mt-1'>Number of booked rooms: {listing.availableRooms}</h1>
+            </div>  
+            <div className='self-end bg-transparent mr-3' style={{float:'left'}}>
+              <button className='bg-cyan-700 p-3 text-white text-2xl rounded-lg'>View bookings</button>
+            </div>      
           </div>
-          <div className='bg-transparent ml-10 flex-1'>
-            <h1 className='bg-transparent text-white text-2xl'>Junior Large Bedroom</h1>
-            <p className='bg-transparent text-white pt-3'>Serbia | Belgrade | Svetozara Miletica 24</p>   
-            <div className='flex bg-transparent gap-6 mt-3'>
-              <span className='flex items-center bg-transparent gap-2'>
-                <IoPersonSharp color='white' className='bg-transparent' size={30}/>
-                <p className='bg-transparent text-white'>2 persons</p>
-              </span>
-              <span className='flex items-center bg-transparent gap-2'>
-                <IoBedSharp color='white' className='bg-transparent' size={30} />
-                <p className='bg-transparent text-white'>1 Queen's size</p>
-              </span>
-            </div> 
-            <h1 className='bg-transparent text-2xl text-white mt-3'>Price: 120$ / night</h1>
-            <h1 className='bg-transparent text-xl text-white mt-10'>Number of rooms: 135</h1>
-            <h1 className='bg-transparent text-xl text-white mt-1'>Number of booked rooms: 97</h1>
-          </div>  
-          <div className='self-end bg-transparent mr-3' style={{float:'left'}}>
-            <button className='bg-cyan-700 p-3 text-white text-2xl rounded-lg'>View bookings</button>
-          </div>      
+          ))}
         </div>
-      </div>
+      }
     </div>
   )
 }
