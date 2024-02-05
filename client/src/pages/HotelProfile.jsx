@@ -137,7 +137,10 @@ export default function HotelProfile() {
               <h1 className='bg-transparent text-xl text-white mt-1'>Number of booked rooms: {listing.availableRooms}</h1>
             </div>  
             <div className='self-end bg-transparent mr-3' style={{float:'left'}}>
-              <button className='bg-cyan-700 p-3 text-white text-2xl rounded-lg'>View bookings</button>
+              <Link to={`/book-room-details/${listing._id}`}>
+                <button className='bg-cyan-700 p-3 text-white text-2xl rounded-lg'>View bookings</button>
+              </Link>
+              
             </div>      
           </div>
           ))}

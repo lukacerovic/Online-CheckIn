@@ -9,3 +9,15 @@ export const createBooking = async (req, res, next) => {
         next(error);
     }
 };
+
+export const getBookingsInfo = async (req, res, next) => {
+   
+    try {
+        const bookingDetails = await Booking.find({roomId: req.params.id});
+        console.log("BOOKINGS Details", bookingDetails);
+        res.status(200).json(bookingDetails);
+    } catch (error) {
+        next(error);
+    }
+  
+}

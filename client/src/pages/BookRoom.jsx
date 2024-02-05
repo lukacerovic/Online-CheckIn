@@ -26,6 +26,7 @@ export default function BookRoom() {
   const currentUserData = currentUser.currentAccount;
 
   const roomId = useParams(); // Dohvatamo roomId iz URL-a
+
   const navigation = useNavigate();
   const [formData, setFormData] = useState({});
 
@@ -143,6 +144,8 @@ export default function BookRoom() {
       setSex(sex);
       setExpireDate(expireDate);
       setFormData({
+        roomId: roomId.id.toString(),
+        touristId: currentUserData._id,
         touristName: surname,
         touristLastName: givenName,
         touristSex: sex,
