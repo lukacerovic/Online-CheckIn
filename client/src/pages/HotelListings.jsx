@@ -2,6 +2,7 @@ import { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FaFilter } from "react-icons/fa";
 import { IoPersonSharp, IoBedSharp } from "react-icons/io5";
+import { FaBath } from "react-icons/fa";
 import Header from '../components/Header';
 
 export default function HotelLIstings() {
@@ -50,7 +51,7 @@ export default function HotelLIstings() {
       <input type='text' placeholder='Search...' className='mb-10 border p-3 rounded-2xl text-white text-lg self-center' style={{width:'80%'}}/>
       {listings && listings.length > 0 && 
         listings.map((listing) => (
-          <div className='mb-8'>
+          <div className='mb-8 container self-center'>
             <div className='self-center w-full'>
                 <div className='flex flex-col'>
                 <input type='file' hidden/>
@@ -65,18 +66,31 @@ export default function HotelLIstings() {
                 <div className='flex gap-6 mt-3'>
                     <span className='flex items-center bg-transparent gap-2'>
                         <IoPersonSharp color='white' className='bg-transparent' size={30}/>
-                        <p className='bg-transparent text-white'>2 persons</p>
+                        <p className='bg-transparent text-white'>2</p>
                     </span>
                     <span className='flex items-center bg-transparent gap-2'>
                         <IoBedSharp color='white' className='bg-transparent' size={30} />
                         <p className='text-white'>{listing.bedrooms}</p>
                     </span>
-                    </div> 
+                    <span className='flex items-center bg-transparent gap-2'>
+                        <FaBath color='white' className='bg-transparent' size={30} />
+                        <p className='text-white'>{listing.bathrooms}</p>
+                    </span>
+                </div> 
+                <div className='flex flex-wrap gap-3 mt-3 text-white capitalize bg-transparent'>
+                  {listing.includes.map((item, index) => (
+                    <div key={index} className='bg-gray-500 px-3 py-2 rounded-lg'>
+                      <p className='bg-transparent'>{item}</p>
+                    </div>
+                  ))}
+                </div>
                 <h1 className="text-2xl mt-5">Price: {listing.price}$ / night</h1>
                 
             </div>
             <div className='flex bg-transparent mr-3 gap-10 mb-10' style={{float:'right'}}>
+              <Link to={`/book-room/${listing._id}`}>
                 <button className='bg-green-700 p-3 text-white text-2xl rounded-lg'>Book now</button>
+              </Link>
                 <button className='bg-slate-700 p-3 text-white text-2xl rounded-lg'>Explore more</button>
             </div> 
           </div>  

@@ -126,7 +126,7 @@ export default function HotelProfile() {
               </div> 
               <div className='flex flex-wrap gap-3 mt-3 text-white capitalize bg-transparent'>
                 {listing.includes.map((item, index) => (
-                  <div key={index} className='bg-transparent'>
+                  <div key={index} className='bg-gray-500 px-3 py-2 rounded-lg'>
                     <p className='bg-transparent'>{item}</p>
                   </div>
                 ))}

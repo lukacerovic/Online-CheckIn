@@ -23,8 +23,8 @@ app.use(express.json());
 app.use(cookieParser());
 
 // kreiramo rikvestove
-app.listen(4000, () => {
-    console.log('Server is running on port 4000');
+app.listen(3000, () => {
+    console.log('Server is running on port 3000');
 });
 
 app.use("/api/hotel", hotelRouter);
