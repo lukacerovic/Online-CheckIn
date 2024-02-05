@@ -5,6 +5,7 @@ import hotelRouter from './routes/hotel.route.js';
 import authRouter from './routes/auth.route.js';
 import touristRouter from './routes/tourist.route.js';
 import roomsRouter from './routes/rooms.route.js';
+import bookingRouter from './routes/booking.route.js';
 import cookieParser from 'cookie-parser';
 
 
@@ -31,6 +32,7 @@ app.use("/api/hotel", hotelRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/tourist", touristRouter);
 app.use('/api/rooms', roomsRouter);
+app.use('/api/booking', bookingRouter);
 
 
 // middlware

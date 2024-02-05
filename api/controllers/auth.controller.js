@@ -58,11 +58,9 @@ export const signinHotel = async(req, res, next) => {
 
 
 export const signinTourist = async (req, res, next) => {
-    console.log('Evo turiste')
     const { email, password } = req.body;
     try{
         const validTourist = await Tourist.findOne({ email });
-        console.log(validTourist);
         if (!validTourist) return next(errorHandler(404, 'User not found'));
         
         const validPassword = bcryptjs.compareSync(password, validTourist.password);

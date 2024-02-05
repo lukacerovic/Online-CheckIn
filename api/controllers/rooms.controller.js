@@ -10,8 +10,6 @@ export const createRoom = async (req, res, next) => {
 };
 
 export const getUserListing = async (req, res, next) => {
-    console.log("Params id: ", req.params.id);
-    console.log("User.id: ", req.user.id);
     if(req.user.id === req.params.id) {
         try {
             const listings = await Rooms.find({userRef: req.params.id});

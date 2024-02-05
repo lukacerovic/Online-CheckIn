@@ -15,7 +15,6 @@ export const updateTourist = async (req, res, next) => {
             req.body.password = bcryptjs.hashSync(req.body.password, 10);
         }
         const existingUser = await Tourist.findById(req.params.id);
-        console.log(existingUser);
         if (!existingUser) {
             return next(errorHandler(404, 'User not found'));
         }
