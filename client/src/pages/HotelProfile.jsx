@@ -10,8 +10,7 @@ export default function HotelProfile() {
   const currentUserData = currentUser.currentAccount;
   const [listings, setListings] = useState(undefined);
   const [showListingsError, setShowListingsError] = useState(false);
-
-  console.log(listings);
+ 
   const dispatch = useDispatch();
   const navigation = useNavigate();
 
@@ -80,7 +79,7 @@ export default function HotelProfile() {
   return (
     <div className='mx-auto flex flex-col'>
       <Header/>
-      <h1 className='text-3xl text-white font-semibold text-center my-10'>Profile</h1>
+      <h1 className='text-3xl text-white font-semibold text-center my-10'>{currentUserData.hotelName}</h1>
       <form className='self-center w-full'>
         <div className='flex flex-col'>
           <img className='rounded shadow h-30 w-40 object-cover cursor-pointer self-center mt-2' src={currentUserData.logo} alt="profile" style={{position:'absolute',}}/>
@@ -102,7 +101,7 @@ export default function HotelProfile() {
         </div>
       </div>
       {listings && listings.length > 0 && 
-        <div className='flex flex-col mt-10 ml-10 mb-10'>
+        <div className='flex flex-col mt-10 mb-10'>
           <h1 className='text-white text-3xl self-center mb-10'>Your All Listings</h1>
           {listings.map((listing) => (
           <div className='flex rounded p-5 mb-5' style={{background:'rgba(229, 228, 226, 0.1)'}}>
@@ -126,7 +125,7 @@ export default function HotelProfile() {
               </div> 
               <div className='flex flex-wrap gap-3 mt-3 text-white capitalize bg-transparent'>
                 {listing.includes.map((item, index) => (
-                  <div key={index} className='bg-gray-500 px-3 py-2 rounded-lg'>
+                  <div key={index} className='bg-gray-500 px-3 py-1 rounded-lg'>
                     <p className='bg-transparent'>{item}</p>
                   </div>
                 ))}

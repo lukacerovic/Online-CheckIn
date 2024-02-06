@@ -16,7 +16,6 @@ export default function BookRoomDetails() {
               throw new Error('HTTP error, status = ' + res.status);
             }
             const data = await res.json();
-            console.log("Ovo je data za booking details: ", data);
             if (!Array.isArray(data)) {
               throw new Error('Data is not in the expected format');
             }
@@ -28,6 +27,29 @@ export default function BookRoomDetails() {
       
         fetchData();
       }, [roomId.id]);
+
+      const handleAssignRoom = async(bookingId) =>{
+        console.log(bookingId);
+        try {
+            const res = await fetch(`/api/booking/assignRoom/${bookingId}/${roomId.id}`, // ruta za update i prosledjujemo id korisnika za proveru da li on ima pravo da menja taj profil
+            {  
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            //   body: JSON.stringify(formData),
+            });
+            const data = await res.json(); // konvertujemo podatke u json format
+            console.log("DaTa",data);
+            if (data.success === false) {
+              console.log(data.message);
+              return;
+            }
+     
+          } catch (error) {
+            console.log(error.message);
+          };
+      };
   return (
     <div className='flex flex-col'>
         <h1 className='text-center text-white text-2xl'>Booking Details For</h1>
@@ -37,21 +59,21 @@ export default function BookRoomDetails() {
                 <table className="w-full mt-6 text-white" >
                     <thead>
                         <tr className="bg-gray-800 font-bold text-left">
-                            <th className="text-sm px-4 py-2">Tourist Name</th>
-                            <th className="text-sm px-4 py-2">Tourist Last Name</th>
-                            <th className="text-sm px-4 py-2">Tourist Sex</th>
-                            <th className="text-sm px-4 py-2">Tourist Birth</th>
-                            <th className="text-sm px-4 py-2">Tourist Nationality</th>
+                            <th className="text-sm px-4 py-2">Name</th>
+                            <th className="text-sm px-4 py-2">Last Name</th>
+                            <th className="text-sm px-4 py-2">Sex</th>
+                            <th className="text-sm px-4 py-2">Birth</th>
+                            <th className="text-sm px-4 py-2">Nationality</th>
                             <th className="text-sm px-4 py-2">Passport Code</th>
                             <th className="text-sm px-4 py-2">Passport Type</th>
                             <th className="text-sm px-4 py-2">Passport No</th>
-                            <th className="text-sm px-4 py-2">Tourist No</th>
+                            <th className="text-sm px-4 py-2">Personal No</th>
                             <th className="text-sm px-4 py-2">Passport Expire</th>
                         </tr>
                     </thead>
                     <tbody>
                         {bookings.map((booking, index) => (
-                            <tr key={index}>
+                            <tr key={index} className='items-center'>
                                 <td className="border px-4 py-2">{booking.touristName}</td>
                                 <td className="border px-4 py-2">{booking.touristLastName}</td>
                                 <td className="border px-4 py-2">{booking.touristSex}</td>
@@ -62,7 +84,19 @@ export default function BookRoomDetails() {
                                 <td className="border px-4 py-2">{booking.touristPassportNo}</td>
                                 <td className="border px-4 py-2">{booking.touristPersonalNo}</td>
                                 <td className="border px-4 py-2">{booking.passportDateOfExpire}</td>
+                                {booking.assignedRoom ? (
+                                    <button className="bg-red-500 capitalize px-4 py-1 mb-3 ml-3">
+                                        Assigned: {booking.assignedRoom} 
+                                    </button>
+                                    
+                                ) : (
+                                    <button onClick={() => handleAssignRoom(booking._id)} className="bg-green-500 capitalize px-4 py-1 mb-3 ml-3">
+                                        Assign Room
+                                    </button>
+                                )}
+
                             </tr>
+                            
                         ))}
                     </tbody>
                 </table>

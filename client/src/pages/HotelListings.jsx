@@ -85,7 +85,7 @@ export default function HotelLIstings() {
                   ))}
                 </div>
                 <h1 className="text-2xl mt-5">Price: {listing.price}$ / night</h1>
-                
+                <h1 className="text-2xl mt-5">Available Rooms: {listing.availableRooms}</h1>
             </div>
             <div className='flex bg-transparent mr-3 gap-10 mb-10' style={{float:'right'}}>
               <Link to={`/book-room/${listing._id}`}>

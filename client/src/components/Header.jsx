@@ -7,7 +7,7 @@ export default function Header() {
   const currentUserData = currentUser.currentAccount;
 
   return (
-    <header className='bg-slate-200 shadow-md'>
+    <header className='bg-slate-200 shadow-md w-full'>
         <div className='flex justify-between items-center max-w-6xl mx-auto p-3'>
             <Link to='/hotel-listings'>
                 <img src="/images/logo2.png" alt='logo' className="h-20" />

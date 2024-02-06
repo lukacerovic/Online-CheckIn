@@ -6,6 +6,10 @@ const bookingSchema = new mongoose.Schema({
         type: String,
         requred: true,
     },
+    touristEmail: {
+        type: String,
+        requred: true,
+    },
     roomId: {
         type: String,
         requred: true,
@@ -57,6 +61,10 @@ const bookingSchema = new mongoose.Schema({
     passportDateOfExpire: {
         type: String,
         requred: true
+    },
+    assignedRoom: {
+        type: Number,
+        requred: false,
     },
 
 }, { timestamps: true });  // prilikom svakog rezultata koji se kreira ce beleziti i vreme kada se rezultat upisao i updatovao.

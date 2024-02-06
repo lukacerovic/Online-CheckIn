@@ -146,6 +146,7 @@ export default function BookRoom() {
       setFormData({
         roomId: roomId.id.toString(),
         touristId: currentUserData._id,
+        touristEmail: currentUserData.email,
         touristName: surname,
         touristLastName: givenName,
         touristSex: sex,
@@ -190,7 +191,7 @@ export default function BookRoom() {
         if(data.success == false){
             console.log("Successfully created");
         }
-        // navigation('/hotel-listings');
+        navigation('/hotel-listings');
     } catch (error) {
       console.log("Error whie submiting: ", error);
     };
@@ -227,29 +228,51 @@ export default function BookRoom() {
         )}
 
         {textResult && (
-          <div className='mt-10 flex flex-col'>
-            <h2 className='text-white text-4xl mb-5'>Text Results:</h2>
+          <div className='mt-10 flex w-full flex-col'>
+            <h2 className='text-white text-center text-4xl mb-5'>Check Filled Form:</h2>
        
-                <h1 className='text-white text-4xl mb-5'>Form to Submit</h1>
-                <form className='flex flex-col gap-4 mt-20' onSubmit={handleSubmitForm}>
-                    <label className='text-white text-lg mt-3'>Country Code</label>
-                    <input type='text' placeholder='Country Code' className='border p-3 rounded-lg text-white' value={formData.touristPassportCode} onChange={handleChange} id='touristPassportCode'/>
-                    <label className='text-white text-lg mt-3'>Type</label>
-                    <input type='text' placeholder='Type' className='border p-3 rounded-lg text-white' value={formData.touristPassportType} onChange={handleChange} id='touristPassportType'/>
-                    <label className='text-white text-lg mt-3'>Passport Number</label>
-                    <input type='text' placeholder='Passport Number' className='border p-3 rounded-lg text-white' value={formData.touristPassportNo} onChange={handleChange} id='touristPassportNo'/>
-                    <label className='text-white text-lg mt-3'>First Name</label>
-                    <input type='text' placeholder='First Name' className='border p-3 rounded-lg text-white' value={formData.touristName} onChange={handleChange} id='touristName'/> 
-                    <label className='text-white text-lg mt-3'>Last Name</label>
-                    <input type='text' placeholder='Last Name' className='border p-3 rounded-lg text-white' value={formData.touristLastName} onChange={handleChange} id='touristLastName'/>
+                <h1 className='text-white text-center text-4xl mb-5'>Form to Submit</h1>
+                <form className='flex self-center flex-col gap-4 mt-20' onSubmit={handleSubmitForm}>
+                    <div className='flex flex-row gap-10'>
+                      <div className='flex flex-col'>
+                        <label className='text-white text-lg mt-3'>Country Code</label>
+                        <input type='text' placeholder='Country Code' className='border p-3 rounded-lg text-white' value={formData.touristPassportCode} onChange={handleChange} id='touristPassportCode'/>
+                      </div>  
+                      <div className='flex flex-col'>
+                        <label className='text-white text-lg mt-3'>Type</label>
+                        <input type='text' placeholder='Type' className='border p-3 rounded-lg text-white' value={formData.touristPassportType} onChange={handleChange} id='touristPassportType'/>
+                      </div>  
+                      <div className='flex flex-col'> 
+                        <label className='text-white text-lg mt-3'>Passport Number</label>
+                        <input type='text' placeholder='Passport Number' className='border p-3 rounded-lg text-white' value={formData.touristPassportNo} onChange={handleChange} id='touristPassportNo'/>
+                      </div> 
+                      <div className='flex flex-col'> 
+                        <label className='text-white text-lg mt-3'>Passport Number</label>
+                        <input type='text' placeholder='Passport Number' className='border p-3 rounded-lg text-white' value={formData.touristPassportNo} onChange={handleChange} id='touristPassportNo'/>
+                      </div> 
+                    </div>
+                    <div className='flex gap-10'>
+                      <div className='flex flex-col'>
+                        <label className='text-white text-lg mt-3'>First Name</label>
+                        <input type='text' placeholder='First Name' className='border p-3 rounded-lg text-white' value={formData.touristName} onChange={handleChange} id='touristName'/> 
+                      </div>
+                      <div className='flex flex-col'>
+                        <label className='text-white text-lg mt-3'>Last Name</label>
+                        <input type='text' placeholder='Last Name' className='border p-3 rounded-lg text-white' value={formData.touristLastName} onChange={handleChange} id='touristLastName'/>
+                      </div> 
+                      <div className='flex flex-col'>
+                        <label className='text-white text-lg mt-3'>Sex</label>
+                        <input type='text' placeholder='Sex' className='border p-3 rounded-lg text-white' value={formData.touristSex} onChange={handleChange} id='touristSex'/> 
+                      </div> 
+                      <div className='flex flex-col'>
+                        <label className='text-white text-lg mt-3'>Date of Birthday</label>
+                        <input type='text' placeholder='Date of Birthday' className='border p-3 rounded-lg text-white' value={formData.touristDateOfBirth} onChange={handleChange} id='touristDateOfBirth'/>
+                      </div> 
+                    </div>
                     <label className='text-white text-lg mt-3'>Nationality</label>
                     <input type='text' placeholder='Nationality' className='border p-3 rounded-lg text-white' value={formData.touristNationality} onChange={handleChange} id='touristNationality'/> 
                     <label className='text-white text-lg mt-3'>Personal No.</label>
                     <input type='text' placeholder='Personal No.' className='border p-3 rounded-lg text-white' value={formData.touristPersonalNo} onChange={handleChange} id='touristPersonalNo'/>
-                    <label className='text-white text-lg mt-3'>Date of Birthday</label>
-                    <input type='text' placeholder='Date of Birthday' className='border p-3 rounded-lg text-white' value={formData.touristDateOfBirth} onChange={handleChange} id='touristDateOfBirth'/>
-                    <label className='text-white text-lg mt-3'>Sex</label>
-                    <input type='text' placeholder='Sex' className='border p-3 rounded-lg text-white' value={formData.touristSex} onChange={handleChange} id='touristSex'/> 
                     <label className='text-white text-lg mt-3'>Date Of Expiry</label>
                     <input type='text' placeholder='Date Of Expiry' className='border p-3 rounded-lg text-white' value={formData.passportDateOfExpire} onChange={handleChange} id='passportDateOfExpire'/> 
                     <button className='bg-green-500 text-white px-5 py-3 text-3xl rounded-lg self-center mt-10 mb-10'>Submit a form</button>
