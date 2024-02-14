@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
+
 export default function BookRoomDetails() {
     const currentUser = useSelector((state) => state.account);
     const currentUserData = currentUser.currentAccount;

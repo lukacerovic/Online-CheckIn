@@ -12,6 +12,7 @@ import EditTourist from "./pages/EditTourist"
 import CreateRoom from "./pages/CreateRoom"
 import BookRoom from "./pages/BookRoom"
 import BookRoomDetails from "./pages/BookRoomDetails"
+import YourRoom from "./pages/YourRoom"
 
 export default function App() {
   return (
@@ -30,6 +31,7 @@ export default function App() {
         <Route path='/create-room' element={<CreateRoom />} />
         <Route path='/book-room/:id' element={<BookRoom />} />
         <Route path='/book-room-details/:id' element={<BookRoomDetails />} />
+        <Route path='/your-room/:roomId/:roomNo' element={<YourRoom />} />
       </Routes>
     </BrowserRouter>
   )

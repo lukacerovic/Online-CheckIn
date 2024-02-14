@@ -13,7 +13,6 @@ export const getUserListing = async (req, res, next) => {
     if(req.user.id === req.params.id) {
         try {
             const listings = await Rooms.find({userRef: req.params.id});
-            console.log(listings);
             res.status(200).json(listings);
         } catch (error) {
             next(error);
@@ -26,7 +25,6 @@ export const getUserListing = async (req, res, next) => {
 export const getAllListings = async (req, res, next) => {
     try {
         const allListings = await Rooms.find();
-        console.log(allListings);
         res.status(200).json(allListings);
     } catch (error) {
         next(error);
