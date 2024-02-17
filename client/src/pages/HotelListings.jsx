@@ -4,13 +4,18 @@ import { FaFilter } from "react-icons/fa";
 import { IoPersonSharp, IoBedSharp } from "react-icons/io5";
 import { FaBath } from "react-icons/fa";
 import Header from '../components/Header';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import SwiperCore from 'swiper';
+import { Navigation } from 'swiper/modules';
+import 'swiper/css/bundle';
 
 export default function HotelLIstings() {
   const [listings, setListings] = useState(undefined);
   const [showListingsError, setShowListingsError] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
 
-  console.log(listings);
-  
+  SwiperCore.use([Navigation]);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -34,10 +39,16 @@ export default function HotelLIstings() {
     fetchData();
   }, []);
 
-  
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const filteredListings = listings && listings.filter(listing => {
+    return listing.name.toLowerCase().includes(searchTerm.toLowerCase());
+  });
+
   return (
-    
-    <div className=' flex flex-col'>
+    <div className=' flex flex-col' style={{width:'100%'}}>
       <Header/>
       <div className='bg-slate-200 shadow-md' style={{height:'30vh'}}>
         <h1 className='text-5xl bg-transparent text-center'>Spline Animation Place</h1>
@@ -48,15 +59,31 @@ export default function HotelLIstings() {
             <FaFilter size={30} color='white' className=""/>
         </div>   
       </div>
-      <input type='text' placeholder='Search...' className='mb-10 border p-3 rounded-2xl text-white text-lg self-center' style={{width:'80%'}}/>
-      {listings && listings.length > 0 && 
-        listings.map((listing) => (
-          <div className='mb-8 container self-center'>
+      <input 
+        type='text' 
+        placeholder='Search...' 
+        className='mb-10 border p-3 rounded-2xl text-white text-lg self-center' 
+        style={{width:'80%'}}
+        value={searchTerm}
+        onChange={handleSearchChange}
+      />
+      {filteredListings && filteredListings.length > 0 && 
+        filteredListings.map((listing) => (
+          <div className='mb-8 container self-center' key={listing._id}>
             <div className='self-center w-full'>
                 <div className='flex flex-col'>
-                <input type='file' hidden/>
                 <img className='rounded shadow h-30 w-40 object-cover cursor-pointer self-center mt-2' src={listing.logo} alt="profile" style={{position:'absolute',}}/>
-                <img src={listing.imageUrls[0]} style={{height:'40vh'}}/>
+                {listing.imageUrls.length > 1 ? (
+                  <Swiper navigation className='w-full'>
+                    {listing.imageUrls.map((image, index) => (
+                      <SwiperSlide key={index}>
+                        <img src={image} className='object-cover w-full' style={{height:'40vw'}}/>
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
+                ) : (
+                  <img src={listing.imageUrls[0]} style={{height:'40vw'}}/>
+                )}
                 </div>
             </div>
             <div className="mx-5 text-white py-3">
@@ -66,7 +93,7 @@ export default function HotelLIstings() {
                 <div className='flex gap-6 mt-3'>
                     <span className='flex items-center bg-transparent gap-2'>
                         <IoPersonSharp color='white' className='bg-transparent' size={30}/>
-                        <p className='bg-transparent text-white'>2</p>
+                        <p className='bg-transparent text-white'>{listing.numberOfGuests}</p>
                     </span>
                     <span className='flex items-center bg-transparent gap-2'>
                         <IoBedSharp color='white' className='bg-transparent' size={30} />

@@ -114,7 +114,7 @@ export default function EditTourist() {
         <input type='text' id='lastName' defaultValue={currentUserData.lastName} onChange={handleChange} className='border p-3 rounded-lg '/>
         <input type='text' id='email' defaultValue={currentUserData.email} onChange={handleChange} placeholder='email' className='border p-3 rounded-lg '/>
         <input type='password' id='password' onChange={handleChange} placeholder='password' className='border p-3 rounded-lg '/>
-        <select defaultValue={currentUserData.gender} onChange={handleChange} id='gender' className='border h-10 text-white p-3 rounded-lg' placeholder='Gender'>
+        <select defaultValue={currentUserData.gender} onChange={handleChange} id='gender' className='border h-20 text-white p-3 rounded-lg' placeholder='Gender'>
             <option value='Male'>Male</option>
             <option value='Female'>Female</option>
             <option value='Other'>Other</option>

@@ -53,7 +53,7 @@ export default function Profile() {
   return (
     <div className='mx-auto flex flex-col'>
       <Header/>
-      <h1 className='text-3xl text-white font-semibold text-center my-10'>Welcome {currentUserData.name} {currentUserData.lastName}</h1>
+      <h1 className='text-3xl text-white font-semibold text-center my-10 capitalize'>Welcome <br/>{currentUserData.name} {currentUserData.lastName}</h1>
       <img className='rounded shadow h-30 w-40 object-cover cursor-pointer self-center mt-2' src={currentUserData.profileImage} alt="profile"/>
       <div className='flex text-white justify-between w-[80%] self-center items-center mb-10' >
         <div className='flex gap-4 mt-5'>

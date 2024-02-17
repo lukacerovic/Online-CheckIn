@@ -55,7 +55,7 @@ export default function SignUpHotel() {
         <input onChange={handleChange} type='lastName' placeholder='Last Name' className='border p-3 rounded-lg' id='lastName'/> 
         <input onChange={handleChange} type='email' placeholder='Email' className='border p-3 rounded-lg' id='email'/>
         <input onChange={handleChange} type='password' placeholder='Password' className='border p-3 rounded-lg' id='password'/>
-        <select onChange={handleChange} id='gender' className='border h-10 text-white p-3 rounded-lg' placeholder='Gender'>
+        <select onChange={handleChange} id='gender' className='border h-20 text-white p-3 rounded-lg' placeholder='Gender'>
             <option value='Male'>Male</option>
             <option value='Female'>Female</option>
             <option value='Other'>Other</option>

@@ -3,6 +3,7 @@ import Tesseract from 'tesseract.js';
 import '../App.css'; // Uvoz CSS fajla ovde
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
+import { FaPassport } from "react-icons/fa";
 
 export default function BookRoom() {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -32,6 +33,9 @@ export default function BookRoom() {
 
 
   const handleImageUpload = async (e) => {
+    if (selectedImage){
+      setSelectedImage(null);
+    }
     const file = e.target.files[0];
     setSelectedImage(file);
     if (!file) return;
@@ -200,11 +204,54 @@ export default function BookRoom() {
   return (
     <div className='flex flex-col'>
       <div className='flex flex-col items-center mt-10'>
-        <input type="file" accept="image/*" onChange={handleImageUpload}/>
+      {!selectedImage && (
+        <div className='text-white mb-20'>
+          <h1 className='text-white sm:text-xl md:text-3xl lg:text-5xl xl:text-6xl text-center py-10'>
+            Passport Upload and Online Check-In
+          </h1>
+          <div className='flex pt-20 justify-between items-start' style={{width:'90vw', gap:'5vw'}}>
+            <div className='flex items-center gap-5'>
+              <div>
+                <h1 className='text-cyan-500 text-6xl'>1</h1>
+              </div>
+              <div>
+                <h1 className='text-cyan-500 sm:text-md md:text-xl lg:text-2xl xl:text-3xl uppercase pb-5'>upload a clear image of your passport</h1>
+                <p className='text-md lg:text-lg xl:text-xl'>Once uploaded, your passport will be scanned, and the necessary fields for online check-in will be populated automatically. You will then have the opportunity to review all entered information before submission.</p>
+              </div>
+            </div>
+            <div className='flex items-center gap-5'>
+              <div>
+                <h1 className='text-cyan-500 text-6xl'>2</h1>
+              </div>
+              <div>
+                <h1 className='text-cyan-500 sm:text-md md:text-xl lg:text-2xl xl:text-3xl uppercase pb-5'>online check-in form</h1>
+                <p className='text-md lg:text-lg xl:text-xl'>
+                  The scanned passport will be used to pre-fill the required details for your online check-in, including personal information and travel documents. Please ensure that the information extracted from the passport is accurate and matches your travel documents.
+                </p>  
+              </div>              
+            </div>
+            <div className='flex items-center gap-5'>
+              <div>
+                <h1 className='text-cyan-500 text-6xl'>3</h1>
+              </div>
+              <div>
+                <h1 className='text-cyan-500 sm:text-md md:text-xl lg:text-2xl xl:text-3xl uppercase pb-5'>finalize your check-in request</h1>
+                <p className='text-md lg:text-lg xl:text-xl'>
+                  After reviewing the populated fields, if all the provided information is correct, you can proceed to submit the form to finalize your online check-in request. Upon successful submission, your online check-in process will be completed, and you will be ready for your upcoming travel.
+                </p>
+              </div>              
+            </div>
+          </div>
+        </div>
+      )}
 
+        <label htmlFor="passportUpload" className="flex gap-3 text-3xl text-white items-center bg-cyan-500 p-3 my-20 rounded-lg cursor-pointer">
+          Upload Your Passport Photo <FaPassport className='bg-transparent' size={'2vw'}/>
+          <input type="file" id="passportUpload" accept="image/*" className="mt-20 bg-green-500 opacity-0 absolute" onChange={handleImageUpload} />
+        </label>
         {selectedImage && (
           <div className='flex flex-col self-center'>
-            <h2 className='text-white text-lg mt-5'>Passport Image:</h2>
+            <h2 className='text-white text-4xl mt-5'>Passport Image:</h2>
             <div style={{ position: 'relative', maxWidth: '100%', borderRadius:'2%' }}>
               <img src={URL.createObjectURL(selectedImage)} alt="Pasoš" style={{ maxWidth: '100%', height:'60vh' }} />
               {scanning && (
