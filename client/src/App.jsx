@@ -13,12 +13,14 @@ import CreateRoom from "./pages/CreateRoom"
 import BookRoom from "./pages/BookRoom"
 import BookRoomDetails from "./pages/BookRoomDetails"
 import YourRoom from "./pages/YourRoom"
+import About from "./pages/About"
 
 export default function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Home />} />
+        <Route path='/about' element={<About />} />
         <Route path='/sign-in-hotel' element={<SignInHotel />} />
         <Route path='/sign-up-hotel' element={<SignUpHotel />} />
         <Route path='/sign-up-tourist' element={<SignUpTourist />} />

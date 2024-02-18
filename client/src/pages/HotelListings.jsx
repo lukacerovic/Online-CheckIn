@@ -50,20 +50,20 @@ export default function HotelLIstings() {
   return (
     <div className=' flex flex-col' style={{width:'100%'}}>
       <Header/>
-      <div className='bg-slate-200 shadow-md' style={{height:'30vh'}}>
-        <h1 className='text-5xl bg-transparent text-center'>Spline Animation Place</h1>
+      <div className='bg-slate-200 shadow-md' style={{height:'20vw'}}>
+        <h1 className='bg-transparent text-center' style={{fontSize:'3vw'}}>Spline Animation Place</h1>
       </div>
       <div className='self-end mb-10 items-center mr-10 mt-10' style={{ width:'60%' }}>
         <div className='flex justify-between'>
-            <h1 className='text-white text-3xl text-center'>Hotel Listings</h1>
-            <FaFilter size={30} color='white' className=""/>
+            <h1 className='text-white text-center' style={{fontSize:'3vw'}}>Hotel Listings</h1>
+            <FaFilter size={'3vw'} color='white' className=""/>
         </div>   
       </div>
       <input 
         type='text' 
         placeholder='Search...' 
-        className='mb-10 border p-3 rounded-2xl text-white text-lg self-center' 
-        style={{width:'80%'}}
+        className='mb-10 border rounded-lg text-white self-center' 
+        style={{width:'80%',fontSize:'2vw', padding:'1vw'}}
         value={searchTerm}
         onChange={handleSearchChange}
       />
@@ -72,53 +72,53 @@ export default function HotelLIstings() {
           <div className='mb-8 container self-center' key={listing._id}>
             <div className='self-center w-full'>
                 <div className='flex flex-col'>
-                <img className='rounded shadow h-30 w-40 object-cover cursor-pointer self-center mt-2' src={listing.logo} alt="profile" style={{position:'absolute',}}/>
+                <img className='rounded shadow object-cover cursor-pointer self-center mt-2' src={listing.logo} alt="profile" style={{position:'absolute', width:'15vw'}}/>
                 {listing.imageUrls.length > 1 ? (
                   <Swiper navigation className='w-full'>
                     {listing.imageUrls.map((image, index) => (
                       <SwiperSlide key={index}>
-                        <img src={image} className='object-cover w-full' style={{height:'40vw'}}/>
+                        <img src={image} className='object-cover w-full' style={{height:'40vw', width:'100%'}}/>
                       </SwiperSlide>
                     ))}
                   </Swiper>
                 ) : (
-                  <img src={listing.imageUrls[0]} style={{height:'40vw'}}/>
+                  <img src={listing.imageUrls[0]} style={{height:'40vw', width:'100%'}}/>
                 )}
                 </div>
             </div>
             <div className="mx-5 text-white py-3">
-                <h1 className="text-3xl capitalize">{listing.name}</h1>
-                <p className='mt-3'>{listing.address}</p>
-                <p>{listing.description}</p>
-                <div className='flex gap-6 mt-3'>
-                    <span className='flex items-center bg-transparent gap-2'>
-                        <IoPersonSharp color='white' className='bg-transparent' size={30}/>
-                        <p className='bg-transparent text-white'>{listing.numberOfGuests}</p>
+                <h1 className="capitalize" style={{fontSize:'3vw'}}>{listing.name}</h1>
+                <p style={{fontSize:'2vw', paddingTop:'1vw', paddingBottom:'1vw'}}>{listing.address}</p>
+                <p style={{fontSize:'1.3vw'}}>{listing.description}</p>
+                <div className='flex mt-3' style={{gap:'3vw'}}>
+                    <span className='flex items-center bg-transparent' style={{gap:'1vw'}}>
+                        <IoPersonSharp color='white' className='bg-transparent' size={'3vw'}/>
+                        <p className='bg-transparent text-white' style={{fontSize:'1.3vw'}}>{listing.numberOfGuests}</p>
                     </span>
-                    <span className='flex items-center bg-transparent gap-2'>
-                        <IoBedSharp color='white' className='bg-transparent' size={30} />
-                        <p className='text-white'>{listing.bedrooms}</p>
+                    <span className='flex items-center bg-transparent' style={{gap:'1vw'}}>
+                        <IoBedSharp color='white' className='bg-transparent' size={'3vw'} />
+                        <p className='text-white' style={{fontSize:'1.3vw'}}>{listing.bedrooms}</p>
                     </span>
-                    <span className='flex items-center bg-transparent gap-2'>
-                        <FaBath color='white' className='bg-transparent' size={30} />
-                        <p className='text-white'>{listing.bathrooms}</p>
+                    <span className='flex items-center bg-transparent' style={{gap:'1vw'}}>
+                        <FaBath color='white' className='bg-transparent' size={'3vw'} />
+                        <p className='text-white' style={{fontSize:'1.3vw'}}>{listing.bathrooms}</p>
                     </span>
                 </div> 
-                <div className='flex flex-wrap gap-3 mt-3 text-white capitalize bg-transparent'>
+                <div className='flex flex-wrap mt-3 text-white capitalize bg-transparent' style={{gap:'1vw'}}>
                   {listing.includes.map((item, index) => (
-                    <div key={index} className='bg-gray-500 px-3 py-2 rounded-lg'>
-                      <p className='bg-transparent'>{item}</p>
+                    <div key={index} className='bg-gray-500 rounded-lg'>
+                      <p className='bg-transparent' style={{fontSize:'1.3vw', padding:'1vw'}}>{item}</p>
                     </div>
                   ))}
                 </div>
-                <h1 className="text-2xl mt-5">Price: {listing.price}$ / night</h1>
-                <h1 className="text-2xl mt-5">Available Rooms: {listing.availableRooms}</h1>
+                <h1 style={{fontSize:'2vw', paddingTop:'1vw'}}>Price: {listing.price}$ / night</h1>
+                <h1 style={{fontSize:'2vw', paddingTop:'1vw'}}>Available Rooms: {listing.availableRooms}</h1>
             </div>
             <div className='flex bg-transparent mr-3 gap-10 mb-10' style={{float:'right'}}>
               <Link to={`/book-room/${listing._id}`}>
-                <button className='bg-green-700 p-3 text-white text-2xl rounded-lg'>Book now</button>
+                <button className='bg-green-700 text-white rounded-lg' style={{fontSize:'2vw', padding:'1vw'}}>Book now</button>
               </Link>
-                <button className='bg-slate-700 p-3 text-white text-2xl rounded-lg'>Explore more</button>
+                <button className='bg-slate-700 text-white rounded-lg' style={{fontSize:'2vw', padding:'1vw'}}>Explore more</button>
             </div> 
           </div>  
         ))
