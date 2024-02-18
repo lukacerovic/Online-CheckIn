@@ -69,14 +69,14 @@ export default function HotelLIstings() {
       />
       {filteredListings && filteredListings.length > 0 && 
         filteredListings.map((listing) => (
-          <div className='mb-8 container self-center' key={listing._id}>
+          <div className='container self-center' style={{marginBottom:'5vw'}} key={listing._id}>
             <div className='self-center w-full'>
                 <div className='flex flex-col'>
                 <img className='rounded shadow object-cover cursor-pointer self-center mt-2' src={listing.logo} alt="profile" style={{position:'absolute', width:'15vw'}}/>
                 {listing.imageUrls.length > 1 ? (
                   <Swiper navigation className='w-full'>
                     {listing.imageUrls.map((image, index) => (
-                      <SwiperSlide key={index}>
+                      <SwiperSlide key={index} className='text-pink-500'>
                         <img src={image} className='object-cover w-full' style={{height:'40vw', width:'100%'}}/>
                       </SwiperSlide>
                     ))}
@@ -107,7 +107,7 @@ export default function HotelLIstings() {
                 <div className='flex flex-wrap mt-3 text-white capitalize bg-transparent' style={{gap:'1vw'}}>
                   {listing.includes.map((item, index) => (
                     <div key={index} className='bg-gray-500 rounded-lg'>
-                      <p className='bg-transparent' style={{fontSize:'1.3vw', padding:'1vw'}}>{item}</p>
+                      <p className='bg-transparent' style={{fontSize:'1vw', padding:'0.5vw'}}>{item}</p>
                     </div>
                   ))}
                 </div>
@@ -116,9 +116,9 @@ export default function HotelLIstings() {
             </div>
             <div className='flex bg-transparent mr-3 gap-10 mb-10' style={{float:'right'}}>
               <Link to={`/book-room/${listing._id}`}>
-                <button className='bg-green-700 text-white rounded-lg' style={{fontSize:'2vw', padding:'1vw'}}>Book now</button>
+                <button className='bg-green-700 text-white rounded-lg' style={{fontSize:'2vw', padding:'0.7vw'}}>Book now</button>
               </Link>
-                <button className='bg-slate-700 text-white rounded-lg' style={{fontSize:'2vw', padding:'1vw'}}>Explore more</button>
+                <button className='bg-slate-700 text-white rounded-lg' style={{fontSize:'2vw', padding:'0.7vw'}}>Explore more</button>
             </div> 
           </div>  
         ))

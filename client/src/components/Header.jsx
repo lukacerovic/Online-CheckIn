@@ -24,9 +24,9 @@ export default function Header() {
                     {currentUserData ? (
                         <>
                             {currentUserData.type === 'hotel' ? (
-                                <img className="rounded-full object-cover" style={{height:'5vw'}} src={currentUserData.logo} alt="" />
+                                <img className="rounded-full object-cover" style={{width:'5vw', height:'5vw'}} src={currentUserData.logo} alt="" />
                             ) : (
-                                <img className="rounded-full object-cover" style={{height:'5vw'}} src={currentUserData.profileImage} alt="" />
+                                <img className="rounded-full object-cover" style={{width:'5vw', height:'5vw'}} src={currentUserData.profileImage} alt="" />
                             )}
                         </>
                     ) : (

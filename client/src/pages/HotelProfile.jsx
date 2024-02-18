@@ -4,6 +4,7 @@ import { IoPersonSharp, IoBedSharp } from "react-icons/io5";
 import Header from '../components/Header';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteUserFailure, deleteUserStart, deleteUserSuccess, signOutUserFailure, signOutUserStart, signOutUserSuccess } from '../redux/account/accountSlice';
+import { FaBath } from 'react-icons/fa';
 
 export default function HotelProfile() {
   const currentUser = useSelector((state) => state.account);
@@ -105,8 +106,8 @@ export default function HotelProfile() {
           <h1 className='text-white text-3xl self-center mb-10'>Your All Listings</h1>
           {listings.map((listing) => (
           <div className='rounded p-5 mb-5' style={{background:'rgba(229, 228, 226, 0.1)'}}>
-            <div className='flex sm:flex-col md:flex-col lg:flex-row bg-transparent'>
-              <div className='flex bg-transparent sm:self-center'>
+            <div className='flex sm:flex-col md:flex-col lg:flex-col bg-transparent'>
+              <div className='flex bg-transparent lg:w-full sm:self-center'>
                 <img style={{height:'20vw'}} className='rounded' src={listing.imageUrls[0]}/>
                 <div className='ml-3 bg-transparent'>
                   {listing.imageUrls.length > 1 ? (
@@ -132,6 +133,10 @@ export default function HotelProfile() {
                   <span className='flex items-center bg-transparent gap-2'>
                     <IoBedSharp color='white' className='bg-transparent md:text-lg lg:text-xl xl:text-2xl' />
                     <p className='bg-transparent text-white'>{listing.bedrooms}</p>
+                  </span>
+                  <span className='flex items-center bg-transparent gap-2'>
+                    <FaBath color='white' className='bg-transparent md:text-lg lg:text-xl xl:text-2xl' />
+                    <p className='bg-transparent text-white'>{listing.bathrooms}</p>
                   </span>
                 </div> 
                 <div className='flex flex-wrap gap-3 mt-3 text-white capitalize bg-transparent'>

@@ -92,12 +92,12 @@ export default function Profile() {
       <div className='flex text-white justify-between w-[80%] self-center items-center mb-10' >
         <div className='flex gap-4 mt-5'>
           <Link to={`/tourist-edit/${currentUserData._id}`}>
-            <button className='bg-slate-700 rounded-lg uppercase cursor-pointer' style={{fontSize:'1.5vw', padding:'1vw'}}>Edit Profile</button>
+            <button className='bg-slate-700 rounded-lg uppercase cursor-pointer' style={{fontSize:'1.2vw', padding:'0.7vw'}}>Edit Profile</button>
           </Link>
         </div>
         <div className='flex gap-4 mt-5'>
-          <span onClick={handleDeleteTourist} className='bg-red-700 rounded-lg uppercase cursor-pointer' style={{fontSize:'1.5vw', padding:'1vw'}}>Delete Account</span>
-          <span onClick={handleSignOut} className='bg-red-700 rounded-lg uppercase cursor-pointer' style={{fontSize:'1.5vw', padding:'1vw'}}>Sign out</span>
+          <span onClick={handleDeleteTourist} className='bg-red-700 rounded-lg uppercase cursor-pointer' style={{fontSize:'1.2vw', padding:'0.7vw'}}>Delete Account</span>
+          <span onClick={handleSignOut} className='bg-red-700 rounded-lg uppercase cursor-pointer' style={{fontSize:'1.2vw', padding:'0.7vw'}}>Sign out</span>
         </div>
       </div>
       {bookings && bookings.length > 0 && 
@@ -119,7 +119,7 @@ export default function Profile() {
                     <div className='flex justify-between bg-transparent'>
                       <div className='flex items-center bg-transparent' style={{marginTop:'5vw', gap:'1vw'}}>
                         <h1 className='bg-transparent text-white' style={{fontSize:'2vw'}}>Booking Status:</h1>
-                        <h1 className='bg-transparent text-green-500' style={{fontSize:'2vw'}}>Booking Confirmed</h1>
+                        <h1 className='bg-transparent text-green-500' style={{fontSize:'2vw'}}>Booking Confirmed!</h1>
                       </div>
                       <div className='bg-cyan-700 rounded-lg flex items-center gap-3' style={{padding:'1vw'}} onClick={openQRPopup}>
                         <button className='text-white' style={{fontSize:'2vw'}}>Your QR Key</button>
