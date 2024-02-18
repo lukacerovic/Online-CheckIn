@@ -6,3 +6,10 @@
     background-color: #222121;
    
 }
+@font-face {
+    font-family: 'Comfortaa-Regular';
+    src: local('Comfortaa-Regular'), url(./fonts/Comfortaa-Regular.ttf) format("truetype");
+}
+h1 {
+    font-family: 'Comfortaa-Regular', sans-serif;
+}
