@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import Registration from '../components/Registration';
 
 export default function SignUpHotel() {
   const [formData, setFormData] = useState({});
@@ -73,6 +74,7 @@ export default function SignUpHotel() {
         </div>
         {error && <p className='text-red-500 mt-5 text-lg md:text-xl lg:ext-3xl xl:text-3xl'>{error}</p>}
       </div>
+      <Registration/>
     </div>
   )
 }

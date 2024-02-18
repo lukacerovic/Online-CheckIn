@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { signInStart, signInSuccess, signInFailure } from '../redux/account/accountSlice.js';
+import Registration from '../components/Registration.jsx';
 
 export default function SignInHotel() {
   const [formData, setFormData] = useState({});
@@ -62,7 +63,7 @@ export default function SignInHotel() {
         </div>
       {error && <p className='text-red-500 mt-5'>{error}</p>}
       </div>
-      
+      <Registration/>
     </div>
   )
 }
