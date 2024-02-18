@@ -42,22 +42,24 @@ export default function SignInHotel() {
   };
 
   return (
-    <div className='p-3 max-w-lg mx-auto'>
-      <h1 className='text-3xl text-center text-white font-semibold my-7'>Sign In Hotel</h1>
-      <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
-        <input onChange={handleChange} type='email' placeholder='Email' className='border p-3 rounded-lg text-white' id='email'/>
-        <input onChange={handleChange} type='password' placeholder='Password' className='border p-3 rounded-lg text-white' id='password'/>
-        <button className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80'>
-          {loading ? 'Loading...' : 'Sign In'}
-        </button>
-      </form>
-      <div className='flex gap-2 mt-5'> 
-        <p className='text-white'>Dont have an account?</p>
-        <Link to={"/sign-up-hotel"}>
-          <span className='text-blue-700'>Sign Up Hotel</span>
-        </Link>
+    <div className='flex flex-col'>
+      <div className='self-center' style={{width:'60%', marginTop:'10vw'}}>
+        <h1 className='text-2xl md:text-4xl lg:ext-5xl xl:text-6xl text-center text-white font-semibold my-7'>Sign In Hotel</h1>
+        <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
+          <input onChange={handleChange} type='email' placeholder='Email' className='border p-3 rounded-lg text-white text-lg md:text-xl lg:ext-3xl xl:text-3xl' id='email'/>
+          <input onChange={handleChange} type='password' placeholder='Password' className='border p-3 rounded-lg text-white text-lg md:text-xl lg:ext-3xl xl:text-3xl' id='password'/>
+          <button className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80 text-lg md:text-xl lg:ext-3xl xl:text-3xl'>
+            {loading ? 'Loading...' : 'Sign In'}
+          </button>
+        </form>
+        <div className='flex gap-2 mt-5'> 
+          <p className='text-white text-lg md:text-xl lg:ext-3xl xl:text-3xl'>Dont have an account?</p>
+          <Link to={"/sign-up-hotel"}>
+            <span className='text-blue-400 text-lg md:text-xl lg:ext-3xl xl:text-3xl'>Sign Up Hotel</span>
+          </Link>
+        </div>
+        {error && <p className='text-red-500 mt-5 text-lg md:text-xl lg:ext-3xl xl:text-3xl'>{error}</p>}
       </div>
-      {error && <p className='text-red-500 mt-5'>{error}</p>}
     </div>
   )
 }
