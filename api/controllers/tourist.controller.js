@@ -1,3 +1,5 @@
+import Booking from "../models/booking.model.js";
+import Rooms from "../models/rooms.model.js";
 import Tourist from "../models/tourist.model.js";
 import { errorHandler } from "../utils/error.js";
 import bcryptjs from 'bcryptjs';
@@ -51,5 +53,28 @@ export const deleteTourist = async (req, res, next) => {
         res.status(200).json('User has been deleted');
     } catch (error) {
         next(error)
+    }
+}
+
+
+export const myBookings = async (req, res, next) => {
+    if(req.user.id !== req.params.id) return next(errorHandler(401, 'You can only see your own bookings'));
+    try{
+        const myBookings = await Booking.find({ touristId: req.params.id });
+
+        const bookingsWithHotelImages = await Promise.all(myBookings.map(async (booking) => {
+            const hotelResult = await Rooms.findById(booking.roomId);
+            const hotelImage = hotelResult.imageUrls[0];
+            const hotelName = hotelResult.name;
+            return {
+                ...booking.toObject(),
+                hotelImage: hotelImage,
+                hotelName: hotelName
+            };
+        }));
+
+        res.status(200).json(bookingsWithHotelImages);
+    } catch (error) {
+        next(error);
     }
 }

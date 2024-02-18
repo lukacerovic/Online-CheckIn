@@ -5,8 +5,6 @@ import Rooms from "../models/rooms.model.js";
 import sgMail from '@sendgrid/mail';
 import dotenv from 'dotenv';
 import QRCode from "qrcode";
-// import QRCodeSvg from 'qrcode-svg';
-
 
 dotenv.config(); // Učitavanje vrednosti iz .env fajla
 
@@ -55,16 +53,14 @@ export const assignRoom = async (req, res, next) => {
 
         await Booking.updateOne({ _id: req.params.id }, { assignedRoom: availableRooms });
         
-        console.log('--------------------------------------------------------');
-
         const sendEmailWithQRCode = async (receiver, qrCodeSVG) => {
-            console.log('SLANJE MEJLAAA!!!', receiver);
+            console.log(receiver);
             try {
                 const msg = {
                     to: receiver,
                     from: 'snapinproject@gmail.com',
                     subject: 'QR Code for Your Room',
-                    html: `<p>Dear Guest,</p><p>Please find attached your QR Code for accessing your room:</p>`,
+                    html: `<p>Dear Guest,</p><p>Please find attached your QR Code for accessing your room.This QR Code represents your room key:</p>`,
                     attachments: [
                         {
                             content: qrCodeSVG.toString('base64'), 
@@ -93,7 +89,7 @@ export const assignRoom = async (req, res, next) => {
                     margin: 1,
                     scale: 1
                 });
-                
+                await Booking.updateOne({ _id: req.params.id }, { qrCode: qrCodeURL });
                 await sendEmailWithQRCode(touristEmail, qrCodeSVG);
         
             } catch (error) {

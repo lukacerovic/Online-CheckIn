@@ -66,6 +66,10 @@ const bookingSchema = new mongoose.Schema({
         type: Number,
         requred: false,
     },
+    qrCode: {
+        type: String,
+        requred: false,
+    },
 
 }, { timestamps: true });  // prilikom svakog rezultata koji se kreira ce beleziti i vreme kada se rezultat upisao i updatovao.
 
