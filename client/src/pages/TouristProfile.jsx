@@ -87,58 +87,58 @@ export default function Profile() {
   return (
     <div className='mx-auto flex flex-col'>
       <Header/>
-      <h1 className='text-3xl text-white font-semibold text-center my-10 capitalize'>Welcome <br/>{currentUserData.name} {currentUserData.lastName}</h1>
-      <img className='rounded shadow h-30 w-40 object-cover cursor-pointer self-center mt-2' src={currentUserData.profileImage} alt="profile"/>
+      <h1 className=' text-md md:text-lg lg:text-xl xl:text-3xl text-white font-semibold text-center my-10 capitalize'>Welcome <br/>{currentUserData.name} {currentUserData.lastName}</h1>
+      <img className='rounded shadow object-cover cursor-pointer self-center mt-2' style={{width:'15vw'}} src={currentUserData.profileImage} alt="profile"/>
       <div className='flex text-white justify-between w-[80%] self-center items-center mb-10' >
         <div className='flex gap-4 mt-5'>
           <Link to={`/tourist-edit/${currentUserData._id}`}>
-            <button className='bg-slate-700 rounded-lg uppercase p-3 cursor-pointer'>Edit Profile</button>
+            <button className='bg-slate-700 rounded-lg uppercase cursor-pointer' style={{fontSize:'1.5vw', padding:'1vw'}}>Edit Profile</button>
           </Link>
         </div>
         <div className='flex gap-4 mt-5'>
-          <span onClick={handleDeleteTourist} className='bg-red-700 rounded-lg p-3 uppercase cursor-pointer'>Delete Account</span>
-          <span onClick={handleSignOut} className='bg-red-700 rounded-lg p-3 uppercase cursor-pointer'>Sign out</span>
+          <span onClick={handleDeleteTourist} className='bg-red-700 rounded-lg uppercase cursor-pointer' style={{fontSize:'1.5vw', padding:'1vw'}}>Delete Account</span>
+          <span onClick={handleSignOut} className='bg-red-700 rounded-lg uppercase cursor-pointer' style={{fontSize:'1.5vw', padding:'1vw'}}>Sign out</span>
         </div>
       </div>
       {bookings && bookings.length > 0 && 
         <div className='flex flex-col mt-10 mb-10 w-[80%] self-center'>
-          <h1 className='text-white text-3xl self-center mb-10'>Your All Bookings</h1>
+          <h1 className='text-white text-lg md:text-xl lg:text-3xl xl:text-5xl self-center mb-10'>Your All Bookings</h1>
           {bookings.map((booking) => (
             <div className='rounded p-5 mb-5' style={{background:'rgba(229, 228, 226, 0.1)'}}>
               <div className='flex flex-col bg-transparent'>
                 <div className='flex bg-transparent w-full'>
                   <img style={{width:'100%', height:'30vw'}} className='rounded object-cover' src={booking.hotelImage}/>
                 </div>
-                <div className='bg-transparent ml-10 flex flex-col flex-1'>
-                  <h1 className='bg-transparent text-white text-md md:text-xl lg:text-2xl xl:text-4xl capitalize'>{booking.hotelName}</h1>
-                  <div className='flex gap-3 items-center bg-transparent'>
-                    <h1 className='bg-transparent md:text-md lg:text-lg xl:text-xl text-white mt-10'>Booking created at:</h1>
-                    <h1 className='bg-gray-500 p-1 rounded-lg md:text-md lg:text-lg xl:text-xl text-white mt-10'>{new Date(booking.createdAt).toLocaleString('en-GB', {hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit', year: '2-digit'})}</h1>
+                <div className='bg-transparent flex flex-col'>
+                  <h1 className='bg-transparent text-white text-sm md:text-xl lg:text-2xl xl:text-4xl capitalize'>{booking.hotelName}</h1>
+                  <div className='flex items-center bg-transparent' style={{marginTop:'5vw', gap:'1vw'}}>
+                    <h1 className='bg-transparent text-white' style={{fontSize:'2vw'}}>Booking created at:</h1>
+                    <h1 className='bg-gray-500 p-1 rounded-lg text-white' style={{fontSize:'2vw'}}>{new Date(booking.createdAt).toLocaleString('en-GB', {hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit', year: '2-digit'})}</h1>
                   </div>
                   {booking.assignedRoom ? (
                     <div className='flex justify-between bg-transparent'>
-                      <div className='flex items-center bg-transparent gap-3 mt-3'>
-                        <h1 className='bg-transparent md:text-md lg:text-lg xl:text-xl text-white'>Booking Status:</h1>
-                        <h1 className='bg-transparent text-green-500 md:text-xl lg:text-2xl xl:text-3xl'>Booking Confirmed</h1>
+                      <div className='flex items-center bg-transparent' style={{marginTop:'5vw', gap:'1vw'}}>
+                        <h1 className='bg-transparent text-white' style={{fontSize:'2vw'}}>Booking Status:</h1>
+                        <h1 className='bg-transparent text-green-500' style={{fontSize:'2vw'}}>Booking Confirmed</h1>
                       </div>
-                      <div className='bg-cyan-700 p-3 rounded-lg flex items-center gap-3' onClick={openQRPopup}>
-                        <button className='text-white md:text-lg lg:text-xl xl:text-2xl'>Your QR Key</button>
+                      <div className='bg-cyan-700 rounded-lg flex items-center gap-3' style={{padding:'1vw'}} onClick={openQRPopup}>
+                        <button className='text-white' style={{fontSize:'2vw'}}>Your QR Key</button>
                         <MdQrCode2 className='bg-transparent' color='white' size={'3vw'}/>
                       </div>
                       {showQRPopup && (
                         <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50 z-50">
-                          <div className="bg-white p-6 rounded-lg flex flex-col gap-5">
-                            <h1 className='text-dark bg-transparent text-md md:text-lg lg:text-xl xl:text-2xl'>This is your key for your room</h1>
-                            <QRCodeSVG value={booking.qrCode} style={{width:'20vw', height:'20vw'}}/>
-                            <button className="bg-cyan-700 text-white px-4 py-2 rounded-md mt-4" onClick={() => setShowQRPopup(false)}>Close</button>
+                          <div className="bg-white rounded-lg flex flex-col" style={{gap:'5vw', padding:'5vw'}}>
+                            <h1 className='text-dark bg-transparent' style={{fontSize:'2vw'}} >This is your key for your room</h1>
+                            <QRCodeSVG value={booking.qrCode} className='self-center' style={{width:'20vw', height:'20vw'}}/>
+                            <button className="bg-cyan-700 text-white rounded-md mt-4" style={{fontSize:'2vw', padding:'1vw'}} onClick={() => setShowQRPopup(false)}>Close</button>
                           </div>
                         </div>
                       )}
                     </div>
                   ) : (
-                    <div className='flex items-center bg-transparent gap-3 mt-3'>
-                      <h1 className='bg-transparent md:text-md lg:text-lg xl:text-xl text-white'>Booking Status:</h1>
-                      <h1 className='bg-transparent text-gray-500 md:text-xl lg:text-2xl xl:text-3xl'>Waithing To Confirm</h1>
+                    <div className='flex items-center bg-transparent' style={{marginTop:'2vw', gap:'1vw'}}>
+                      <h1 className='bg-transparent text-white' style={{fontSize:'2vw'}}>Booking Status:</h1>
+                      <h1 className='bg-transparent text-gray-500 ' style={{fontSize:'2vw'}}>Waithing To Confirm</h1>
                     </div>
                   )}
                 </div>  
