@@ -14,6 +14,7 @@ import BookRoom from "./pages/BookRoom"
 import BookRoomDetails from "./pages/BookRoomDetails"
 import YourRoom from "./pages/YourRoom"
 import About from "./pages/About"
+import RoomDetails from "./pages/RoomDetails"
 
 export default function App() {
   return (
@@ -28,6 +29,7 @@ export default function App() {
         <Route path='/hotel-profile' element={<HotelProfile />} />
         <Route path='/hotel-listings' element={<HotelListings />} />
         <Route path='/hotel-edit/:id' element={<EditHotel />} />
+        <Route path='/room-details/:id' element={<RoomDetails />} />
         <Route path='/tourist-edit/:id' element={<EditTourist />} />
         <Route path='/tourist-profile' element={<TouristProfile />} />
         <Route path='/create-room' element={<CreateRoom />} />

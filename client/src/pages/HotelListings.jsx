@@ -88,7 +88,7 @@ export default function HotelLIstings() {
             </div>
             <div className="mx-5 text-white py-3">
                 <h1 className="capitalize" style={{fontSize:'3vw'}}>{listing.name}</h1>
-                <p style={{fontSize:'2vw', paddingTop:'1vw', paddingBottom:'1vw'}}>{listing.address}</p>
+                <h1 style={{fontSize:'2vw', paddingTop:'1vw', paddingBottom:'1vw'}}>{listing.address}</h1>
                 <p style={{fontSize:'1.3vw'}}>{listing.description}</p>
                 <div className='flex mt-3' style={{gap:'3vw'}}>
                     <span className='flex items-center bg-transparent' style={{gap:'1vw'}}>
@@ -118,7 +118,9 @@ export default function HotelLIstings() {
               <Link to={`/book-room/${listing._id}`}>
                 <button className='bg-green-700 text-white rounded-lg' style={{fontSize:'2vw', padding:'0.7vw'}}>Book now</button>
               </Link>
+              <Link to={`/room-details/${listing._id}`}>
                 <button className='bg-slate-700 text-white rounded-lg' style={{fontSize:'2vw', padding:'0.7vw'}}>Explore more</button>
+              </Link>  
             </div> 
           </div>  
         ))

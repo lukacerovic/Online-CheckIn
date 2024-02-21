@@ -30,3 +30,13 @@ export const getAllListings = async (req, res, next) => {
         next(error);
     }
 };
+
+export const getRoomDetails = async (req, res, next) => { 
+    try {
+        const room = await Rooms.findById(req.params.id);
+        console.log(room);
+        res.status(200).json(room);
+    } catch (error) {
+        next(error);
+    }  
+};
