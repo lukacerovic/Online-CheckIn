@@ -1,4 +1,5 @@
 import Rooms from "../models/rooms.model.js";
+import Hotels from "../models/hotel.model.js";
 
 export const createRoom = async (req, res, next) => {
     try {
@@ -34,8 +35,12 @@ export const getAllListings = async (req, res, next) => {
 export const getRoomDetails = async (req, res, next) => { 
     try {
         const room = await Rooms.findById(req.params.id);
-        console.log(room);
-        res.status(200).json(room);
+        const hotelEmail = await Hotels.findOne({_id: room.userRef});
+        res.status(200).json({
+            ...room,
+            hotelEmail: hotelEmail.email
+            
+        });
     } catch (error) {
         next(error);
     }  
