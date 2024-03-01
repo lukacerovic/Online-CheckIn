@@ -112,14 +112,14 @@ export default function Profile() {
                 <div className='bg-transparent flex flex-col'>
                   <h1 className='bg-transparent text-white text-sm md:text-xl lg:text-2xl xl:text-4xl capitalize'>{booking.hotelName}</h1>
                   <div className='flex items-center bg-transparent' style={{marginTop:'5vw', gap:'1vw'}}>
-                    <h1 className='bg-transparent text-white' style={{fontSize:'2vw'}}>Booking created at:</h1>
-                    <h1 className='bg-gray-500 p-1 rounded-lg text-white' style={{fontSize:'2vw'}}>{new Date(booking.createdAt).toLocaleString('en-GB', {hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit', year: '2-digit'})}</h1>
+                    <h1 className='bg-transparent text-white' style={{fontSize:'1.5vw'}}>Booking created at:</h1>
+                    <h1 className='bg-gray-500 p-1 rounded-lg text-white' style={{fontSize:'1.5vw'}}>{new Date(booking.createdAt).toLocaleString('en-GB', {hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit', year: '2-digit'})}</h1>
                   </div>
                   {booking.assignedRoom ? (
                     <div className='flex justify-between bg-transparent'>
                       <div className='flex items-center bg-transparent' style={{marginTop:'5vw', gap:'1vw'}}>
-                        <h1 className='bg-transparent text-white' style={{fontSize:'2vw'}}>Booking Status:</h1>
-                        <h1 className='bg-transparent text-green-500' style={{fontSize:'2vw'}}>Booking Confirmed!</h1>
+                        <h1 className='bg-transparent text-white' style={{fontSize:'1.5vw'}}>Booking Status:</h1>
+                        <h1 className='bg-transparent text-green-500' style={{fontSize:'1.5vw'}}>Booking Confirmed!</h1>
                       </div>
                       <div className='bg-cyan-700 rounded-lg flex items-center gap-3' style={{padding:'1vw'}} onClick={openQRPopup}>
                         <button className='text-white' style={{fontSize:'2vw'}}>Your QR Key</button>
@@ -137,8 +137,8 @@ export default function Profile() {
                     </div>
                   ) : (
                     <div className='flex items-center bg-transparent' style={{marginTop:'2vw', gap:'1vw'}}>
-                      <h1 className='bg-transparent text-white' style={{fontSize:'2vw'}}>Booking Status:</h1>
-                      <h1 className='bg-transparent text-gray-500 ' style={{fontSize:'2vw'}}>Waithing To Confirm</h1>
+                      <h1 className='bg-transparent text-white' style={{fontSize:'1.5vw'}}>Booking Status:</h1>
+                      <h1 className='bg-transparent text-gray-500 ' style={{fontSize:'1.5vw'}}>Waithing To Confirm</h1>
                     </div>
                   )}
                 </div>  

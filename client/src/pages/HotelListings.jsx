@@ -8,12 +8,18 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore from 'swiper';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css/bundle';
+import HotelLIstingsAnimation from '../components/HotelListingsAnimation.jsx'
+import { useSelector } from 'react-redux';
 
 export default function HotelLIstings() {
   const [listings, setListings] = useState(undefined);
   const [showListingsError, setShowListingsError] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
 
+  const currentUser = useSelector((state) => state.account);
+  const currentUserData = currentUser.currentAccount;
+
+  console.log(currentUserData);
   SwiperCore.use([Navigation]);
 
   useEffect(() => {
@@ -50,8 +56,8 @@ export default function HotelLIstings() {
   return (
     <div className=' flex flex-col' style={{width:'100%'}}>
       <Header/>
-      <div className='bg-slate-200 shadow-md' style={{height:'20vw'}}>
-        <h1 className='bg-transparent text-center' style={{fontSize:'3vw'}}>Spline Animation Place</h1>
+      <div className='self-center'>
+        <HotelLIstingsAnimation/>
       </div>
       <div className='self-end mb-10 items-center mr-10 mt-10' style={{ width:'60%' }}>
         <div className='flex justify-between'>
@@ -77,30 +83,30 @@ export default function HotelLIstings() {
                   <Swiper navigation className='w-full'>
                     {listing.imageUrls.map((image, index) => (
                       <SwiperSlide key={index} className='text-pink-500'>
-                        <img src={image} className='object-cover w-full' style={{height:'40vw', width:'100%'}}/>
+                        <img src={image} className='object-cover w-full' style={{height:'30vw', width:'100%'}}/>
                       </SwiperSlide>
                     ))}
                   </Swiper>
                 ) : (
-                  <img src={listing.imageUrls[0]} style={{height:'40vw', width:'100%'}}/>
+                  <img src={listing.imageUrls[0]} className='object-cover' style={{height:'30vw', width:'100%'}}/>
                 )}
                 </div>
             </div>
             <div className="mx-5 text-white py-3">
-                <h1 className="capitalize" style={{fontSize:'3vw'}}>{listing.name}</h1>
-                <h1 style={{fontSize:'2vw', paddingTop:'1vw', paddingBottom:'1vw'}}>{listing.address}</h1>
-                <p style={{fontSize:'1.3vw'}}>{listing.description}</p>
+                <h1 className="capitalize" style={{fontSize:'2vw'}}>{listing.name}</h1>
+                <h1 style={{fontSize:'1.5vw', paddingTop:'1vw', paddingBottom:'1vw'}}>{listing.address}</h1>
+                <p style={{fontSize:'1vw'}}>{listing.description}</p>
                 <div className='flex mt-3' style={{gap:'3vw'}}>
                     <span className='flex items-center bg-transparent' style={{gap:'1vw'}}>
-                        <IoPersonSharp color='white' className='bg-transparent' size={'3vw'}/>
+                        <IoPersonSharp color='white' className='bg-transparent' size={'2vw'}/>
                         <p className='bg-transparent text-white' style={{fontSize:'1.3vw'}}>{listing.numberOfGuests}</p>
                     </span>
                     <span className='flex items-center bg-transparent' style={{gap:'1vw'}}>
-                        <IoBedSharp color='white' className='bg-transparent' size={'3vw'} />
+                        <IoBedSharp color='white' className='bg-transparent' size={'2vw'} />
                         <p className='text-white' style={{fontSize:'1.3vw'}}>{listing.bedrooms}</p>
                     </span>
                     <span className='flex items-center bg-transparent' style={{gap:'1vw'}}>
-                        <FaBath color='white' className='bg-transparent' size={'3vw'} />
+                        <FaBath color='white' className='bg-transparent' size={'2vw'} />
                         <p className='text-white' style={{fontSize:'1.3vw'}}>{listing.bathrooms}</p>
                     </span>
                 </div> 
@@ -111,15 +117,18 @@ export default function HotelLIstings() {
                     </div>
                   ))}
                 </div>
-                <h1 style={{fontSize:'2vw', paddingTop:'1vw'}}>Price: {listing.price}$ / night</h1>
-                <h1 style={{fontSize:'2vw', paddingTop:'1vw'}}>Available Rooms: {listing.availableRooms}</h1>
+                <h1 style={{fontSize:'1.5vw', paddingTop:'1vw'}}>Price: {listing.price}$ / night</h1>
+                <h1 style={{fontSize:'1.5vw', paddingTop:'1vw'}}>Available Rooms: {listing.availableRooms}</h1>
             </div>
             <div className='flex bg-transparent mr-3 gap-10 mb-10' style={{float:'right'}}>
-              <Link to={`/book-room/${listing._id}`}>
-                <button className='bg-green-700 text-white rounded-lg' style={{fontSize:'2vw', padding:'0.7vw'}}>Book now</button>
-              </Link>
+              {currentUserData.type !== 'hotel' && (
+                <Link to={`/book-room/${listing._id}`}>
+                  <button className='bg-green-700 text-white rounded-lg' style={{fontSize:'1.5vw', padding:'0.7vw'}}>Book now</button>
+                </Link>
+              )}
+              
               <Link to={`/room-details/${listing._id}`}>
-                <button className='bg-slate-700 text-white rounded-lg' style={{fontSize:'2vw', padding:'0.7vw'}}>Explore more</button>
+                <button className='bg-slate-700 text-white rounded-lg' style={{fontSize:'1.5vw', padding:'0.7vw'}}>Explore more</button>
               </Link>  
             </div> 
           </div>  

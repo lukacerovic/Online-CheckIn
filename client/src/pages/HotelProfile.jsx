@@ -5,6 +5,10 @@ import Header from '../components/Header';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteUserFailure, deleteUserStart, deleteUserSuccess, signOutUserFailure, signOutUserStart, signOutUserSuccess } from '../redux/account/accountSlice';
 import { FaBath } from 'react-icons/fa';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import SwiperCore from 'swiper';
+import { Navigation } from 'swiper/modules';
+import 'swiper/css/bundle';
 
 export default function HotelProfile() {
   const currentUser = useSelector((state) => state.account);
@@ -12,6 +16,8 @@ export default function HotelProfile() {
   const [listings, setListings] = useState(undefined);
   const [showListingsError, setShowListingsError] = useState(false);
  
+  SwiperCore.use([Navigation]);
+
   const dispatch = useDispatch();
   const navigation = useNavigate();
 
@@ -84,7 +90,7 @@ export default function HotelProfile() {
       <form className='self-center w-full'>
         <div className='flex flex-col'>
           <img className='rounded shadow h-30 w-40 object-cover cursor-pointer self-center mt-2' src={currentUserData.logo} alt="profile" style={{position:'absolute',}}/>
-          <img className='object-cover' src='https://images.unsplash.com/photo-1561501900-3701fa6a0864?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bHV4dXJ5JTIwaG90ZWx8ZW58MHx8MHx8fDA%3D' style={{height:'40vw'}}/>
+          <img className='object-cover' src='https://images.unsplash.com/photo-1561501900-3701fa6a0864?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bHV4dXJ5JTIwaG90ZWx8ZW58MHx8MHx8fDA%3D' style={{height:'30vw'}}/>
         </div>
       </form>
       <div className='flex text-white justify-between w-[80%] self-center items-center mb-10' >
@@ -108,15 +114,16 @@ export default function HotelProfile() {
           <div className='rounded p-5 mb-5' style={{background:'rgba(229, 228, 226, 0.1)'}}>
             <div className='flex sm:flex-col md:flex-col lg:flex-col bg-transparent'>
               <div className='flex bg-transparent lg:w-full sm:self-center'>
-                <img style={{height:'20vw'}} className='rounded' src={listing.imageUrls[0]}/>
+                {/* <img style={{height:'20vw'}} className='rounded' src={listing.imageUrls[0]}/> */}
                 <div className='ml-3 bg-transparent'>
-                  {listing.imageUrls.length > 1 ? (
-                    <>
-                      <img style={{height:'8vw'}} className='rounded mb-3' src={listing.imageUrls[1]} />
-                      {listing.imageUrls.length > 2 && (
-                        <img style={{height:'8vw'}} className='rounded' src={listing.imageUrls[2]} />
-                      )}
-                    </>
+                  {listing.imageUrls.length > 0 ? (
+                    <Swiper navigation style={{height:'30vw', width:'75vw'}}>
+                      {listing.imageUrls.map((image, index) => (
+                        <SwiperSlide key={index}>
+                          <img src={image} className='object-cover' style={{width:'100%'}} />
+                        </SwiperSlide>
+                      ))}
+                  </Swiper>
                   ) : (
                     <img style={{height:'8vw'}} className='rounded mb-3' src='https://publish.purewow.net/wp-content/uploads/sites/2/2019/08/grand-velas.jpeg?fit=1360%2C906'/>
                   )}

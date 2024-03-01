@@ -76,7 +76,7 @@ export default function BookRoomDetails() {
                     </thead>
                     <tbody>
                         {bookings.map((booking, index) => (
-                            <tr key={index} className='items-center'>
+                            <tr key={index} >
                                 <td className="border text-center" style={{paddingLeft:'0.5vw',fontSize:'0.8vw'}}>{booking.touristName}</td>
                                 <td className="border text-center" style={{paddingLeft:'0.5vw',fontSize:'0.8vw'}}>{booking.touristLastName}</td>
                                 <td className="border text-center" style={{paddingLeft:'0.5vw',fontSize:'0.8vw'}}>{booking.touristSex}</td>
@@ -88,12 +88,12 @@ export default function BookRoomDetails() {
                                 <td className="border text-center" style={{paddingLeft:'0.5vw',fontSize:'0.8vw'}}>{booking.touristPersonalNo}</td>
                                 <td className="border text-center" style={{paddingLeft:'0.5vw',fontSize:'0.8vw'}}>{booking.passportDateOfExpire}</td>
                                 {booking.assignedRoom ? (
-                                    <button className="bg-red-500 capitalize px-4 py-1 mb-3 ml-3">
+                                    <button className="bg-red-500 capitalize" style={{fontSize:'1.45vw',marginLeft:'0.5vw', paddingInline:'0.5vw', marginBottom:'0.8vw'}}>
                                         Assigned: {booking.assignedRoom} 
                                     </button>
                                     
                                 ) : (
-                                    <button onClick={() => handleAssignRoom(booking._id)} className="bg-green-500 capitalize" style={{fontSize:'1.5vw',marginLeft:'0.5vw', paddingInline:'0.5vw'}}>
+                                    <button onClick={() => handleAssignRoom(booking._id)} className="bg-green-500 capitalize" style={{fontSize:'1.5vw',marginLeft:'0.5vw', paddingInline:'0.5vw', marginBottom:'0.8vw'}}>
                                         Assign Room
                                     </button>
                                 )}

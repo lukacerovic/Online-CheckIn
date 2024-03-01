@@ -60,7 +60,7 @@ export const assignRoom = async (req, res, next) => {
                     to: receiver,
                     from: 'snapinproject@gmail.com',
                     subject: 'QR Code for Your Room',
-                    html: `<p>Dear Guest,</p><p>Please find attached your QR Code for accessing your room.This QR Code represents your room key:</p>`,
+                    html: `<p>Dear Guest,</p><p>Please find attached your QR Code for accessing your room.This QR Code represents your key for room ${availableRooms}:</p>`,
                     attachments: [
                         {
                             content: qrCodeSVG.toString('base64'), 
